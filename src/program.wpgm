@@ -5,12 +5,16 @@ import personaje.*
 program abc {
 
 	game.width(8)
-	game.height(12)
+	game.height(8)
 	game.title("Juego")
 	
 	game.addVisual(mario)  //RECIBE CUALQUIER OBJETO VISUAL
 	
-	keyboard.x().onPressDo({game.removeVisual(mario)})
+	keyboard.x().onPressDo({
+		game.removeVisual(mario)
+		tomaco.position(game.at(3,4))
+		game.addVisual(tomaco)
+	})
 	
 	game.start
 

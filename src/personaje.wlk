@@ -12,3 +12,16 @@ object mario {
 	
 	
 }
+
+object tomaco {
+	var image = "tomaco.png"
+	var position = 
+	
+	method position(unaPosicion){position = unaPosicion} // SETTER (INDICACION)
+	method position() = position  // GETTER (CONSULTA)
+
+	method image(unaImagen){image = unaImagen} //SETTER (INDICAION)
+	method image() = image //GETTER (CONSULTA)
+	
+	
+}
