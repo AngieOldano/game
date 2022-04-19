@@ -1,0 +1,17 @@
+import wollok.game.*
+import personaje.*
+
+
+program abc {
+
+	game.width(8)
+	game.height(12)
+	game.title("Juego")
+	
+	game.addVisual(mario)  //RECIBE CUALQUIER OBJETO VISUAL
+	
+	keyboard.x().onPressDo({game.removeVisual(mario)})
+	
+	game.start
+
+}
