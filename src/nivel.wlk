@@ -17,9 +17,18 @@ object musica{
 }
 
 
-class Pared{
+class Posiciones{
 	var property position
 	const property image 
-	const property lugarLibre = false
+	const property lugarLibre = true
+	
+	method estaOcupado(){
+		if()
+	}
 }
+
+
+
+
+	
 

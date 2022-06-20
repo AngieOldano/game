@@ -1,29 +1,36 @@
 import wollok.game.*
 import nivel.*
-
+import bombas.*
 
 object protagonista{
-	var property position = game.at(1,1)
 	var property image = "bombermanDerecha.png"
-	var vidas = 3
-	var property direccion
-	//var mirandoA = izquierda
+	var property position = game.at(1,1)
+	var property jugadorVivo = true
 
-
-	method subir(){self.mover(position.up(1))}
-	method bajar(){self.mover(position.down(1))}
-	method izquierda(){self.mover(position.left(1))}
-	method derecha(){self.mover(position.right(1))}
-	method mover(pos){
-		position=pos
+ 		
+	method subir(){self.moverse(position.up(1))}
+	method bajar(){self.moverse(position.down(1))}
+	method izquierda(){
+		self.moverse(position.left(1))
+		self.image('bombermanIzquierda.png')
 	}
-	method tirarBomba(){
-		self.plantarBomba(new Bomba())
+	method derecha(){
+		self.moverse(position.right(1))
+		self.image('bombermanDerecha.png')
+	}
+
+	
+	method moverse(pos){
+
+			self.position(pos)
 	}
 	
-	method plantarBomba(bomba){
-		position.clone().drawElement(bomba)
+	
+	method tirarBomba(){
+		const bomba = new Bomba(position=self.position().clone(),image = 'bomba.png')
+		game.addVisual(bomba)
 	}
+
 
 }
 
