@@ -11,14 +11,16 @@ program Bomberman {
 	 
 	// límites del juego
 	game.width(25)
-	game.height(14)
+	game.height(15)
 	
 	// fondo
-	game.boardGround("background.jpg")
+	game.ground("pasto.jpg")
 	game.addVisual(protagonista)
 	game.addVisual(new Ladrillo())
-	musica.play()
+	new Nivel1().agregarTodosLosBloques()
+	//musica.play()
 
+	
 
 	protagonista.moverse(game.at(1,1))
 	keyboard.up().onPressDo({protagonista.subir()})
@@ -26,6 +28,8 @@ program Bomberman {
 	keyboard.left().onPressDo({protagonista.izquierda()})
 	keyboard.right().onPressDo({protagonista.derecha()})
 	keyboard.space().onPressDo({protagonista.tirarBomba()})
+	
+
 	
 	game.start()
 	

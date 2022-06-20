@@ -19,3 +19,16 @@ class Ladrillo inherits Elemento{
 		game.onTick(1000,"sacar explosion a los 1000 segundos",{exp.sacarExplosion()})
 	}
 }
+
+
+class Bloque inherits Elemento{
+	var property position
+	var property image = 'bedrock.png'
+
+	
+
+	override method sePuedeRomper()=false
+	override method desaparecer(){}
+}
+
+
