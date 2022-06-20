@@ -1,0 +1,31 @@
+import wollok.game.*
+import bomberman.*
+import Enemigo.*
+import nivel.*
+
+program Bomberman {
+	
+	game.title("Bomberman!")
+	
+	// límites del juego
+	game.width(25)
+	game.height(14)
+	
+	// fondo
+	game.boardGround("background.jpg")
+	game.addVisualIn(protagonista,game.at(1,1))
+	musica.play()
+	keyboard.up().onPressDo({protagonista.subir()})
+	keyboard.down().onPressDo({protagonista.bajar()})
+	keyboard.left().onPressDo({protagonista.izquierda()})
+	keyboard.right().onPressDo({protagonista.derecha()})
+	keyboard.space().onPressDo({protagonista.tirarBomba()})
+	//game.onCollideDo(protagonista,{unPowerUp => protagonista.agarrar(unPowerUp)})
+
+
+	
+	game.start()
+	
+}
+
+	
