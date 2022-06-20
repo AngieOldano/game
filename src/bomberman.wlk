@@ -28,7 +28,7 @@ object protagonista{
 	
 	method tirarBomba(){
 		const bomba = new Bomba(position=self.position().clone(),image = 'bomba.png')
-		game.addVisual(bomba)
+		bomba.spawn()
 	}
 
 

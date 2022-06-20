@@ -2,11 +2,13 @@ import wollok.game.*
 import bomberman.*
 import Enemigo.*
 import nivel.*
+import bombas.* 
+import elementos.*
 
 program Bomberman {
 	
 	game.title("Bomberman!")
-	
+	 
 	// límites del juego
 	game.width(25)
 	game.height(14)
@@ -14,6 +16,7 @@ program Bomberman {
 	// fondo
 	game.boardGround("background.jpg")
 	game.addVisual(protagonista)
+	game.addVisual(new Ladrillo())
 	musica.play()
 
 
