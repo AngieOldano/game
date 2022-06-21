@@ -4,11 +4,12 @@ import bombas.*
 class Elemento{
 	method sePuedeRomper()
 	method desaparecer()
+	
 }
 
 
 class Ladrillo inherits Elemento{
-	var property position = game.at(1,3)
+	var property position
 	var property image = 'ladrillo.png'
 	
 	override method sePuedeRomper()=true
@@ -24,8 +25,6 @@ class Ladrillo inherits Elemento{
 class Bloque inherits Elemento{
 	var property position
 	var property image = 'bedrock.png'
-
-	
 
 	override method sePuedeRomper()=false
 	override method desaparecer(){}

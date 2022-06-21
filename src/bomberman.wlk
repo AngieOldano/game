@@ -7,7 +7,7 @@ object protagonista{
 	var property position = game.at(1,1)
 	var property jugadorVivo = true
 
- 		
+ 	
 	method subir(){self.moverse(position.up(1))}
 	method bajar(){self.moverse(position.down(1))}
 	method izquierda(){

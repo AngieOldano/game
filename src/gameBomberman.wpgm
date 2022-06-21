@@ -16,9 +16,8 @@ program Bomberman {
 	// fondo
 	game.ground("pasto.jpg")
 	game.addVisual(protagonista)
-	game.addVisual(new Ladrillo())
-	new Nivel1().agregarTodosLosBloques()
-	//musica.play()
+	new Nivel1().agregarTodosElementos()
+	musica.play()
 
 	
 

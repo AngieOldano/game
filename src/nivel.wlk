@@ -1,6 +1,6 @@
 import wollok.game.*
 import elementos.*
-
+import Enemigo.*
 	
 object musica{
 	var property ost = game.sound("StageTheme.mp3")
@@ -40,7 +40,8 @@ class Nivel{
 									  game.at(20,2),game.at(20,4),game.at(20,6),game.at(20,8),game.at(20,10),game.at(20,12),
 									  game.at(22,2),game.at(22,4),game.at(22,6),game.at(22,8),game.at(22,10),game.at(22,12),
 									  ]
-
+	var enemigos=[]
+	
 	method agregarBloquesDelBorde(){
 		return self.posDeBloquesBordes().forEach{p=>game.addVisual(new Bloque(position=p,image='bedrock.png'))}}
 	
@@ -51,13 +52,38 @@ class Nivel{
 		self.agregarBloquesDelMedio()
 		self.agregarBloquesDelBorde()}
 	
+	method colocarEnemigos(){
+		(0..5).forEach{idx=>enemigos.add(new Enemigo(
+					image='enem1.png',
+					position=new Position(x = 0.randomUpTo(game.width()).truncate(0),
+										 y= 1.randomUpTo(game.height()).truncate(0))))
+										 game.addVisual(enemigos.last())}
+										 game.onTick(800,'colocar enemigos',{self.moverEnemigos()})}
+		
+					
+	method moverEnemigos(){
+		enemigos.forEach{e=>e.mover()}
+	}									 
 	method agregarLadrillos()
+	method agregarTodosElementos()
+
 }
 	
 class Nivel1 inherits Nivel{
-	var property posLadrillos = [game.at(1,3),game.at(3,3),game.at(3,5),game.at(1,5),game.at(5,3),game.at(5,7)]
-	override method agregarLadrillos(){}
+	var property posLadrillos = [game.at(1,3),game.at(3,1),game.at(4,1),game.at(1,5),game.at(5,3),game.at(5,7),game.at(5,7),game.at(5,7),
+								 game.at(1,3),game.at(3,3),game.at(3,5),game.at(1,5),game.at(5,3),game.at(5,7),game.at(5,7),game.at(5,7),
+								 game.at(1,3),game.at(3,3),game.at(3,5),game.at(1,5),game.at(5,3),game.at(5,7),game.at(5,7),game.at(5,7)]
+	
+	override method agregarLadrillos(){
+		return self.posLadrillos().forEach{p=>game.addVisual(new Ladrillo(position=p,image='ladrillo.png'))}}
+	
+	override method agregarTodosElementos(){
+		self.agregarTodosLosBloques()
+		self.agregarLadrillos()
+		self.colocarEnemigos()}
 }
+	
+
 
 
 	
