@@ -4,7 +4,7 @@ import bombas.*
 class Elemento{
 	method sePuedeRomper()
 	method desaparecer()
-	
+
 }
 
 

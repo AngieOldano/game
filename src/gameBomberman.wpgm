@@ -10,8 +10,8 @@ program Bomberman {
 	game.title("Bomberman!")
 	 
 	// límites del juego
-	game.width(25)
-	game.height(15)
+	game.width(20)
+	game.height(12)
 	
 	// fondo
 	game.ground("pasto.jpg")

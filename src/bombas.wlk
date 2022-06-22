@@ -17,6 +17,7 @@ class Bomba{
 		game.removeVisual(self)
 		self.explotar()
 	}
+
 	method explotar(){
 		const exp = new Explosion(position=self.position().clone())
 		self.posicionesQuePuedenExplotar()
@@ -24,7 +25,7 @@ class Bomba{
 		self.explotarObjetos()
 		game.onTick(1000,"sacar explosion a los 1000 segundos",{exp.sacarExplosion()})
 	}
-	
+
 	method explotarObjetos(){
 		self.posicionesAExplotar().forEach{p=>self.explotarObjeto(p)}
 	}
@@ -32,8 +33,6 @@ class Bomba{
 	method explotarObjeto(posicion){
 		game.getObjectsIn(posicion).forEach{objeto => objeto.desaparecer()}
 	}
-	
-	
 	
 	method posicionesQuePuedenExplotar(){
 		if(game.getObjectsIn(position.up(1))!=null){self.posicionesAExplotar().add(position.up(1))}

@@ -18,16 +18,7 @@ object musica{
 
 
 class Nivel{
-	var property posDeBloquesBordes = [game.at(0,0),game.at(0,1),game.at(0,2),game.at(0,3),game.at(0,4),game.at(0,5),
-		game.at(0,6),game.at(0,7),game.at(0,8),game.at(0,9),game.at(0,10),game.at(0,11),game.at(0,12),game.at(0,13),
-		game.at(0,14),game.at(1,0),game.at(2,0),game.at(3,0),game.at(4,0),game.at(5,0),game.at(6,0),game.at(7,0),
-		game.at(8,0),game.at(9,0),game.at(10,0),game.at(11,0),game.at(12,0),game.at(13,0),game.at(14,0),game.at(15,0),
-		game.at(16,0),game.at(17,0),game.at(18,0),game.at(19,0),game.at(20,0),game.at(21,0),game.at(22,0),game.at(23,0),
-		game.at(24,0),game.at(24,1),game.at(24,2),game.at(24,3),game.at(24,4),game.at(24,5),game.at(24,6),game.at(24,7),
-		game.at(24,8),game.at(24,9),game.at(24,10),game.at(24,11),game.at(24,12),game.at(24,13),game.at(23,14),game.at(23,15),game.at(24,14),
-		game.at(22,14),game.at(21,14),game.at(20,14),game.at(19,14),game.at(18,14),game.at(17,14),game.at(16,14),game.at(15,14),
-		game.at(14,14),game.at(13,14),game.at(12,14),game.at(11,14),game.at(10,14),game.at(9,14),game.at(8,14),game.at(7,14),
-		game.at(6,14),game.at(5,14),game.at(4,14),game.at(3,14),game.at(2,14),game.at(1,14)]
+	var property posDeBloquesBordes = []
 	var property posDeBloquesMedio = [game.at(2,2),game.at(2,4),game.at(2,6),game.at(2,8),game.at(2,10),game.at(2,12),
 									  game.at(4,2),game.at(4,4),game.at(4,6),game.at(4,8),game.at(4,10),game.at(4,12),
 									  game.at(6,2),game.at(6,4),game.at(6,6),game.at(6,8),game.at(6,10),game.at(6,12),
@@ -43,8 +34,22 @@ class Nivel{
 	var enemigos=[]
 	
 	method agregarBloquesDelBorde(){
-		return self.posDeBloquesBordes().forEach{p=>game.addVisual(new Bloque(position=p,image='bedrock.png'))}}
-	
+		(game.width()).times{i=>posDeBloquesBordes.add(new Bloque(
+							position=new Position(x=i-1,y=0)))
+							game.addVisual(posDeBloquesBordes.last())}
+		(game.width()-1).times{i=>posDeBloquesBordes.add(new Bloque(
+							position=new Position(x=i,y=game.height()-1)))
+							game.addVisual(posDeBloquesBordes.last())}
+		(game.height()-1).times{i=>posDeBloquesBordes.add(new Bloque(
+							position=new Position(x=0,y=i)))
+							game.addVisual(posDeBloquesBordes.last())}
+		(game.height()-1).times{i=>posDeBloquesBordes.add(new Bloque(
+							position=new Position(x=game.width()-1,y=i)))
+							game.addVisual(posDeBloquesBordes.last())}		
+		}
+
+		
+
 	method agregarBloquesDelMedio(){
 		return self.posDeBloquesMedio().forEach{p=>game.addVisual(new Bloque(position=p,image='bedrock.png'))}}
 	
@@ -55,8 +60,8 @@ class Nivel{
 	method colocarEnemigos(){
 		(0..5).forEach{idx=>enemigos.add(new Enemigo(
 					image='enem1.png',
-					position=new Position(x = 0.randomUpTo(game.width()).truncate(0),
-										 y= 1.randomUpTo(game.height()).truncate(0))))
+					position=new Position(x = 5.randomUpTo(game.width()-1).truncate(0),
+										 y= 5.randomUpTo(game.height()-1).truncate(0))))
 										 game.addVisual(enemigos.last())}
 										 game.onTick(800,'colocar enemigos',{self.moverEnemigos()})}
 		
@@ -82,9 +87,5 @@ class Nivel1 inherits Nivel{
 		self.agregarLadrillos()
 		self.colocarEnemigos()}
 }
-	
 
-
-
-	
-
+}
