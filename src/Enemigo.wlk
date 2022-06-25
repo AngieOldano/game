@@ -1,4 +1,6 @@
 import wollok.game.*
+import elementos.*
+import direcciones.*
 
 class Enemigo{
 	var property position
@@ -13,23 +15,47 @@ class Enemigo{
 		return direcciones
 	}
 	
+//	method mover(){
+//		self.position(self.direcPosibles().anyOne().mover(position))}
+	
+	
 	method mover(){
-		self.position(self.direcPosibles().anyOne().mover(position))}
-}
+		self.moverse(self.direcPosibles().anyOne())}
 
-object arriba{
-	method mover(pos){
-		return pos.up(1)}	
+
+	method moverse(dir) {
+		self.moverseSiPuede(dir)
+	}
+
+	method moverseSiPuede(dir){
+		if (dir.puedeIr(dir)) {
+			self.moverHacia(dir)
+		}
+	}
+
+	method puedeMoverse(pos) = pos.allElements().all{ o => o.esAtravesable()}
+
+	method moverHacia(dir) {
+		if (self.puedeMoverse(self.direcPosibles().anyOne())){
+			self.position(self.direcPosibles().anyOne())
+		}
+	}
+
+
 }
-object abajo{
-	method mover(pos){
-		return pos.down(1)}	
-}
-object derecha{
-	method mover(pos){
-		return pos.right(1)}	
-}
-object izquierda{
-	method mover(pos){
-		return pos.left(1)}	
-}
+//object arriba{
+//	method mover(pos){
+//		return pos.up(1)}	
+//}
+//object abajo{
+//	method mover(pos){
+//		return pos.down(1)}	
+//}
+//object derecha{
+//	method mover(pos){
+//		return pos.right(1)}	
+//}
+//object izquierda{
+//	method mover(pos){
+//		return pos.left(1)}	
+//}
