@@ -29,8 +29,7 @@ class Nivel{
 									  game.at(16,2),game.at(16,4),game.at(16,6),game.at(16,8),game.at(16,10),game.at(16,12),
 									  game.at(18,2),game.at(18,4),game.at(18,6),game.at(18,8),game.at(18,10),game.at(18,12),
 									  game.at(20,2),game.at(20,4),game.at(20,6),game.at(20,8),game.at(20,10),game.at(20,12),
-									  game.at(22,2),game.at(22,4),game.at(22,6),game.at(22,8),game.at(22,10),game.at(22,12),
-									  ]
+									  game.at(22,2),game.at(22,4),game.at(22,6),game.at(22,8),game.at(22,10),game.at(22,12)]
 	var enemigos=[]
 	
 	method agregarBloquesDelBorde(){
@@ -61,17 +60,25 @@ class Nivel{
 		(0..5).forEach{idx=>enemigos.add(new Enemigo(
 					image='enem1.png',
 					position=new Position(x = 5.randomUpTo(game.width()-1).truncate(0),
-										 y= 5.randomUpTo(game.height()-1).truncate(0))))
+										 y= 0.randomUpTo(game.height()-1).truncate(0))))
 										 game.addVisual(enemigos.last())}
-										 game.onTick(800,'colocar enemigos',{self.moverEnemigos()})}
+										 game.onTick(200,'colocar enemigos',{self.moverEnemigos()})}
 		
 					
 	method moverEnemigos(){
-		enemigos.forEach{e=>e.mover()}
+		enemigos.forEach{e=>e.mover()
+		self.chocaObjeto()
+		}
 	}									 
 	method agregarLadrillos()
 	method agregarTodosElementos()
 
+	method chocaObjeto(){
+		enemigos.forEach{e=>
+			game.onCollideDo(e,{obj=>
+				e.mover()})
+		}
+	}
 }
 	
 class Nivel1 inherits Nivel{
