@@ -17,6 +17,19 @@ object musica{
 	}
 }
 
+object pantallaInicio{
+	
+	method menu(){
+		game.title("Bomberman!")
+		game.height(13)
+		game.width(21)
+		game.boardGround('bombermanInicio.png')
+		keyboard.enter().onPressDo{nivel1.configuracion()}
+		
+	}
+	
+}
+
 class Nivel{
 
 	method keyboard(){

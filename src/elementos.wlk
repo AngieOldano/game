@@ -34,7 +34,7 @@ class Bloque inherits Elemento{
 	var property position
 	var property image = 'piedra.jpg'
 
-	override method desaparecer(){}
+
 }
 
 
