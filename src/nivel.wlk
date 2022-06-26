@@ -41,8 +41,10 @@ class Nivel{
 		game.clear()
 		direcciones.movBomberman(protagonista)
 		paredesBorde.agregarBloquesDelBorde()
+		corazones.agregarCorazones()
 		paredesNivel1.agregarBloquesDelMedio()
-		paredesNivel1.agregarLadrillos()
+	//	paredesNivel1.agregarLadrillos()
+		
 		self.individuos()
 		self.keyboard()
 	}

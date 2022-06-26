@@ -45,7 +45,6 @@ class Bomba{
 		game.getObjectsIn(self.position().down(1)).forEach({e => e.explotar()})
 		game.getObjectsIn(self.position().left(1)).forEach({e => e.explotar()})
 		game.getObjectsIn(self.position().right(1)).forEach({e => e.explotar()})
-		game.sound('exp.mp3')
 		self.explosionCruz()
 	}
 

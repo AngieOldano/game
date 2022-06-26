@@ -2,6 +2,7 @@ import wollok.game.*
 import nivel.*
 import bombas.*
 import direcciones.*
+import elementos.*
 
 class Individuos{
 
@@ -51,8 +52,16 @@ object protagonista inherits Individuos{
 	method perderVida(){
 		vidas = vidas - 1
 		position = game.at(1, 1)
-		if(vidas == 0) {
-			self.morir()}
+		if(vidas == 2){
+			corazones.cambiarACorazones2()
+		}
+		else if(vidas == 1){
+			corazones.cambiarACorazones1()
+		}
+		else{
+			self.morir()
+			game.stop()}
+			
 	}
 	
 	method chocarConIndividuo(enemigo){
