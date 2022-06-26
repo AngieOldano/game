@@ -5,51 +5,58 @@ import elementos.*
 class Bomba{
 	var property position
 	var property image = 'bomba.png'
-	var property objetosAVer = []
-	var property posicionesAExplotar = []
-	
-	method spawn(){
-		game.addVisual(self)
-		game.onTick(3000,"explota en 3 segundos",{self.sacarBomba()})
-	}
-	method sacarBomba(){
-		game.removeTickEvent("explota en 3 segundos")
+
+		
+
+	method explotar() {
 		game.removeVisual(self)
-		self.explotar()
-	}
-
-	method explotar(){
-		const exp = new Explosion(position=self.position().clone())
-		self.posicionesQuePuedenExplotar()
-		game.addVisual(exp)
-		self.explotarObjetos()
-		game.onTick(1000,"sacar explosion a los 1000 segundos",{exp.sacarExplosion()})
-	}
-
-	method explotarObjetos(){
-		self.posicionesAExplotar().forEach{p=>self.explotarObjeto(p)}
 	}
 	
-	method explotarObjeto(posicion){
-		game.getObjectsIn(posicion).forEach{objeto => objeto.desaparecer()}
+	method chocarConIndividuo(quien){
+		quien.chocarPared()
 	}
-	
-	method posicionesQuePuedenExplotar(){
-		if(game.getObjectsIn(position.up(1))!=null){self.posicionesAExplotar().add(position.up(1))}
-		if(game.getObjectsIn(position.down(1))!=null){self.posicionesAExplotar().add(position.down(1))}
-		if(game.getObjectsIn(position.left(1))!=null){self.posicionesAExplotar().add(position.left(1))}
-		if(game.getObjectsIn(position.right(1))!=null){self.posicionesAExplotar().add(position.right(1))}
-		}
+
+	method explosionCruz() {
+		var exp1 = new Explosion()
+		var exp2 = new Explosion()
+		var exp3 = new Explosion()
+		var exp4 = new Explosion()
+		var exp5 = new Explosion()
+		var x = self.position().x()
+		var y = self.position().y()
+		const todasLasExp = #{ exp1, exp2, exp3, exp4, exp5 }
+		
+		game.addVisualIn(exp1, game.at(x, y))
+		game.addVisualIn(exp2, game.at(x + 1, y))
+		game.addVisualIn(exp3, game.at(x - 1, y))
+		game.addVisualIn(exp4, game.at(x, y + 1))
+		game.addVisualIn(exp5, game.at(x, y - 1))
+		game.schedule(500,{todasLasExp.forEach({exp=>game.removeVisual(exp)})})
+	}
+
+	method spawn() {
+		game.onTick(3000, "la bomba explota", {=> self.explosion()})
+	}
+
+	method explosion() {
+		game.removeTickEvent("la bomba explota")
+		game.getObjectsIn(self.position()).forEach({e => e.explotar()})
+		game.getObjectsIn(self.position().up(1)).forEach({e => e.explotar()})
+		game.getObjectsIn(self.position().down(1)).forEach({e => e.explotar()})
+		game.getObjectsIn(self.position().left(1)).forEach({e => e.explotar()})
+		game.getObjectsIn(self.position().right(1)).forEach({e => e.explotar()})
+		game.sound('exp.mp3')
+		self.explosionCruz()
+	}
+
 }
-	
 
 class Explosion{
 	var property position
-	var property image = 'explosion.png'
-	method sacarExplosion(){
-		game.removeTickEvent("sacar explosion a los 1000 segundos")
-		game.removeVisual(self)
-	}
+	var property image = "explosion.png"
+	
+
+
 }
 
 

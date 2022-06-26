@@ -1,6 +1,6 @@
 import wollok.game.*
-import bomberman.*
-import Enemigo.*
+import individuos.*
+import direcciones.*
 import nivel.*
 import bombas.* 
 import elementos.*
@@ -8,27 +8,16 @@ import elementos.*
 program Bomberman {
 	
 	game.title("Bomberman!")
-	 
-	// límites del juego
-	game.width(20)
-	game.height(12)
+
+
+	game.height(13)
+	game.width(21)
 	
-	// fondo
 	game.ground("pasto.jpg")
-	game.addVisual(protagonista)
-	new Nivel1().agregarTodosElementos()
-	musica.play()
 
-	
+//	musica.play()
 
-	protagonista.moverse(game.at(1,1))
-	keyboard.up().onPressDo({protagonista.subir()})
-	keyboard.down().onPressDo({protagonista.bajar()})
-	keyboard.left().onPressDo({protagonista.izquierda()})
-	keyboard.right().onPressDo({protagonista.derecha()})
-	keyboard.space().onPressDo({protagonista.tirarBomba()})
-	
-
+	nivel1.configuracion()
 	
 	game.start()
 	
