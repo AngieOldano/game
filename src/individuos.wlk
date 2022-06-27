@@ -85,9 +85,6 @@ class Enemigo inherits Individuos{
 	}
 	
 	method chocarConIndividuo(prota){}
-	
-	
-
 }
 	
 
