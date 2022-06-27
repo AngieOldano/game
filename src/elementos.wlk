@@ -76,9 +76,27 @@ object paredesBorde {
 		(game.height()-1).times{i=>posDeBloquesBordes.add(new Bloque(
 							position=new Position(x=game.width()-1,y=i)))
 							game.addVisual(posDeBloquesBordes.last())}		
-		}
-
+		}		
 }
+		
+object corazones{	
+	var property position = game.at(0,0)
+	var property image = '3_corazones.png'
+	
+	method cambiarACorazones2(){
+		image='2_corazones.png'
+	}
+	
+	method cambiarACorazones1(){
+		image='1_corazon.png'
+	}
+	method agregarCorazones(){
+		game.addVisual(self)
+	}
+	
+}
+
+
 
 object paredesNivel1 {
 	var property posDeBloquesMedio = [game.at(2,2),game.at(2,4),game.at(2,6),game.at(2,8),game.at(2,10),game.at(2,12),
