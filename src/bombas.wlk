@@ -1,6 +1,6 @@
 import wollok.game.*
 import elementos.*
-
+import individuos.*
 
 class Bomba{
 	var property position
@@ -55,7 +55,7 @@ class Explosion{
 	var property image = "explosion.png"
 	
 	method chocarConIndividuo(quien){
-		
+		quien.explotar()
 	}
 }
 

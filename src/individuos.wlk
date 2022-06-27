@@ -10,9 +10,11 @@ class Individuos{
 		game.removeVisual(self)
 	}
 	
+	method perderVida()
 
 	method chocarPared(){}
-
+	
+	method explotar()
 	
 }
 
@@ -38,7 +40,7 @@ object protagonista inherits Individuos{
 		direcciones.chocar(self, direccion)
 	}
 
-	method explotar(){
+	override method explotar(){
 		self.perderVida()
 	}
 	
@@ -46,7 +48,7 @@ object protagonista inherits Individuos{
 		game.say(self,vidas.toString())
 	}
 	
-	method perderVida(){
+	override method perderVida(){
 		vidas = vidas - 1
 		position = game.at(1, 1)
 		if(vidas == 2){
@@ -57,7 +59,11 @@ object protagonista inherits Individuos{
 		}
 		else{
 			self.morir()
-			game.stop()}
+			musicaNivel.stop()
+			musicaPerder.play()
+			game.allVisuals().forEach{ visual => game.removeVisual(visual)}
+			game.addVisualIn(pantallaDePerder,game.at(0,0))	}
+			pantallaDePerder.iniciarAnimacion()
 			
 	}
 	
@@ -111,8 +117,12 @@ class Enemigo inherits Individuos{
 	
 	method chocarConIndividuo(prota){}
 	
-	method explotar(){
-		game.removeVisual(self)
+	override method explotar(){
+		self.perderVida()
+	}
+	
+	override method perderVida(){
+		self.morir()
 	}
 }
 	

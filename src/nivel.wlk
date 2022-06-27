@@ -10,12 +10,6 @@ object musicaNivel{
 		ost.shouldLoop(true)
 		game.schedule(500, { ost.play()} )
 	}
-	method pause(){
-		ost.pause()
-	}
-	method resume(){
-		ost.resume()
-	}
 	method stop(){
 		ost.stop()
 	}
@@ -28,13 +22,18 @@ object musicaFinal{
 		ost.shouldLoop(true)
 		game.schedule(500, { ost.play()} )
 	}
-	method pause(){
-		ost.pause()
-	}
-	method resume(){
-		ost.resume()
+}
+
+object musicaPerder{
+	var property ost = game.sound("loseTheme.mp3")
+
+	method play(){
+		ost.shouldLoop(true)
+		game.schedule(500, { ost.play()} )
 	}
 }
+
+
 
 object juego {
 	var juegoIniciado = false
@@ -73,6 +72,30 @@ object pantallaDeInicio{
 	}
 }
 
+object pantallaDePerder{
+
+	var imagen = false
+	method iniciarAnimacion(){
+		game.onTick(250,"Animacion del derrota",{self.cambiar()})
+	}
+	method terminarAnimacion(){
+		game.removeTickEvent("Animacion del derrota")
+	}
+	method cambiar(){
+		if(imagen)
+			imagen = false
+		else
+			imagen = true
+	}
+	method image() {
+		if(imagen)
+			return "victoria.png"
+		else
+			return "victoria2.png"
+	}
+}
+	
+
 
 object pantallaDeVictoria{
 	var imagen = false
@@ -90,9 +113,9 @@ object pantallaDeVictoria{
 	}
 	method image() {
 		if(imagen)
-			return "victoria.png"
+			return "perder.png"
 		else
-			return "victoria2.png"
+			return "perder2.png"
 	}
 }
 
