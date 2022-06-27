@@ -16,18 +16,41 @@ object musica{
 		ost.resume()
 	}
 }
-
-object pantallaInicio{
-	
-	method menu(){
+object juego {
+	var juegoIniciado = false
+	method iniciar(){
 		game.title("Bomberman!")
 		game.height(13)
 		game.width(21)
-		game.boardGround('bombermanInicio.png')
-		keyboard.enter().onPressDo{nivel1.configuracion()}
-		
+		game.boardGround("pasto.jpg")
+		game.addVisualIn(pantallaDeInicio,game.at(0,0))
+		pantallaDeInicio.iniciarAnimacion()
+		keyboard.enter().onPressDo({nivel1.configuracion()})  
+		musica.play()	
+		game.start()
 	}
-	
+}
+
+object pantallaDeInicio{
+	var imagen = false
+	method iniciarAnimacion(){
+		game.onTick(250,"Animacion del menu",{self.cambiar()})
+	}
+	method terminarAnimacion(){
+		game.removeTickEvent("Animacion del menu")
+	}
+	method cambiar(){
+		if(imagen)
+			imagen = false
+		else
+			imagen = true
+	}
+	method image() {
+		if(imagen)
+			return "bombermanInicioEnter.png"
+		else
+			return "bombermanInicio.png"
+	}
 }
 
 class Nivel{

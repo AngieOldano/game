@@ -7,12 +7,7 @@ import elementos.*
 
 program Bomberman {
 	
-	game.title("Bomberman!")
-	game.height(13)
-	game.width(21)
-//	musica.play()
-	game.ground('pasto.jpg')		
-	nivel1.configuracion()
+	juego.iniciar()
 	game.start()
 }
 
