@@ -26,6 +26,11 @@ object protagonista inherits Individuos{
 	var property direccion = null
 	var property nivel = 1
 	
+	method volverAlInicio(){
+		position = game.at(1, 1)
+		game.addVisual(self)
+	}
+
 	
 	method tirarBomba(){
 		const bomba = new Bomba(position=self.position().clone(),image = 'bomba.png')
@@ -50,7 +55,8 @@ object protagonista inherits Individuos{
 	
 	override method perderVida(){
 		vidas = vidas - 1
-		position = game.at(1, 1)
+		game.removeVisual(self)
+		game.schedule(510,{ => self.volverAlInicio() })
 		if(vidas == 2){
 			corazones.cambiarACorazones2()
 		}
@@ -61,7 +67,6 @@ object protagonista inherits Individuos{
 			self.morir()
 			musicaNivel.stop()
 			musicaPerder.play()
-			game.allVisuals().forEach{ visual => game.removeVisual(visual)}
 			game.addVisualIn(pantallaDePerder,game.at(0,0))	}
 			pantallaDePerder.iniciarAnimacion()
 			

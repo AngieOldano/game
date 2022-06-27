@@ -74,25 +74,13 @@ object pantallaDeInicio{
 
 object pantallaDePerder{
 
-	var imagen = false
+	var imagen = true
 	method iniciarAnimacion(){
-		game.onTick(250,"Animacion del derrota",{self.cambiar()})
+		game.onTick(250,"Animacion del derrota",{self.image()})
 	}
-	method terminarAnimacion(){
-		game.removeTickEvent("Animacion del derrota")
-	}
-	method cambiar(){
-		if(imagen)
-			imagen = false
-		else
-			imagen = true
-	}
-	method image() {
-		if(imagen)
-			return "victoria.png"
-		else
-			return "victoria2.png"
-	}
+
+	method image(){return "perder.jpg"	}
+
 }
 	
 
@@ -111,11 +99,11 @@ object pantallaDeVictoria{
 		else
 			imagen = true
 	}
-	method image() {
+	method image(){
 		if(imagen)
-			return "perder.png"
+			return "victoria.png"
 		else
-			return "perder2.png"
+			return "victoria2.png"
 	}
 }
 
