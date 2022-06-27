@@ -3,8 +3,27 @@ import elementos.*
 import direcciones.*
 import individuos.*
 
-object musica{
+object musicaNivel{
 	var property ost = game.sound("StageTheme.mp3")
+
+	method play(){
+		ost.shouldLoop(true)
+		game.schedule(500, { ost.play()} )
+	}
+	method pause(){
+		ost.pause()
+	}
+	method resume(){
+		ost.resume()
+	}
+	method stop(){
+		ost.stop()
+	}
+}
+
+object musicaFinal{
+	var property ost = game.sound("victheme.mp3")
+
 	method play(){
 		ost.shouldLoop(true)
 		game.schedule(500, { ost.play()} )
@@ -16,17 +35,18 @@ object musica{
 		ost.resume()
 	}
 }
+
 object juego {
 	var juegoIniciado = false
 	method iniciar(){
-		game.title("Bomberman!")
+		game.title("Bomberman")
 		game.height(13)
 		game.width(21)
-		game.boardGround("pasto.jpg")
+		game.ground("pasto.jpg")
 		game.addVisualIn(pantallaDeInicio,game.at(0,0))
 		pantallaDeInicio.iniciarAnimacion()
 		keyboard.enter().onPressDo({nivel1.configuracion()})  
-		musica.play()	
+		musicaNivel.play()	
 		game.start()
 	}
 }
@@ -52,6 +72,32 @@ object pantallaDeInicio{
 			return "bombermanInicio.png"
 	}
 }
+
+
+object pantallaDeVictoria{
+	var imagen = false
+	method iniciarAnimacion(){
+		game.onTick(250,"Animacion del victoria",{self.cambiar()})
+	}
+	method terminarAnimacion(){
+		game.removeTickEvent("Animacion del victoria")
+	}
+	method cambiar(){
+		if(imagen)
+			imagen = false
+		else
+			imagen = true
+	}
+	method image() {
+		if(imagen)
+			return "victoria.png"
+		else
+			return "victoria2.png"
+	}
+}
+
+
+
 
 class Nivel{
 
@@ -206,7 +252,4 @@ object nivel3 inherits Nivel {
 		ene5.position(game.at(16, 9))
 	}
 }
-
-
-
 

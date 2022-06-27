@@ -69,8 +69,19 @@ object protagonista inherits Individuos{
 		if(nivel==1){
 			nivel=2
 			nivel2.configuracion()}
-
+		else if(nivel==2){
+			nivel=3
+			nivel3.configuracion()}
+		else if(nivel==3){
+			musicaNivel.stop()
+			musicaFinal.play()
+			game.allVisuals().forEach{ visual => game.removeVisual(visual)}
+			game.addVisualIn(pantallaDeVictoria,game.at(0,0))
+			pantallaDeVictoria.iniciarAnimacion()
 		}
+	}
+	
+
 }
 
 
