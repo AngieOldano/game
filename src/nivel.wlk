@@ -43,13 +43,12 @@ class Nivel{
 		paredesBorde.agregarBloquesDelBorde()
 		corazones.agregarCorazones()
 		paredesNivel1.agregarBloquesDelMedio()
-<<<<<<< HEAD
 		paredesNivel1.agregarLadrillos()
 		paredesNivel1.agregarPuertaASiguienteNivel()
-=======
+
 	//	paredesNivel1.agregarLadrillos()
 		
->>>>>>> 2ba8d7245ae0bd29f3ec2d0094bb68f51b0e0bf3
+
 		self.individuos()
 		self.keyboard()
 	}
