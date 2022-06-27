@@ -10,10 +10,7 @@ class Individuos{
 		game.removeVisual(self)
 	}
 	
-	method explotar(){
-		game.removeVisual(self)
-	}
-	
+
 	method chocarPared(){}
 
 	
@@ -26,6 +23,7 @@ object protagonista inherits Individuos{
 	var property vidas=3
 	var property direccion = null
 	var property nivel = 1
+	
 	
 	method tirarBomba(){
 		const bomba = new Bomba(position=self.position().clone(),image = 'bomba.png')
@@ -40,7 +38,7 @@ object protagonista inherits Individuos{
 		direcciones.chocar(self, direccion)
 	}
 
-	override method explotar(){
+	method explotar(){
 		self.perderVida()
 	}
 	
@@ -101,6 +99,10 @@ class Enemigo inherits Individuos{
 	}
 	
 	method chocarConIndividuo(prota){}
+	
+	method explotar(){
+		game.removeVisual(self)
+	}
 }
 	
 

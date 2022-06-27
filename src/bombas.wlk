@@ -54,8 +54,9 @@ class Explosion{
 	var property position
 	var property image = "explosion.png"
 	
-
-
+	method chocarConIndividuo(quien){
+		
+	}
 }
 
 
