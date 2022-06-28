@@ -1,5 +1,11 @@
 import wollok.game.*
+import juego.*
 import individuos.*
+import musica.*
+import bombas.* 
+import elementos.*
+import nivel.*
+
 
 object direcciones {
 
@@ -39,5 +45,71 @@ object arriba {
 	method direccion(position) = position.up(1)
 	method alChocar() = abajo
 }
+
+
+
+
+
+
+
+
+
+
+
+object menu {
+
+    var property seleccionado = 0
+ 
+    
+    const opciones = [play, salir]
+
+    const fondoEmpezar = "pasto.jpg")
+	
+	method seleccionar() = opciones.get(seleccionado)
+
+    method iniciar(){
+        self.configurarControles()
+        game.addVisual(fondoEmpezar)
+        opciones.forEach({option => game.addVisual(option)})
+   
+    }
+
+    method configurarControles() {
+        keyboard.up().onPressDo({ self.arriba() })
+        keyboard.down().onPressDo({ self.abajo()})
+        keyboard.enter().onPressDo({ self.select() })
+
+ 
+    }
+
+	method arriba(){
+    	self.seleccionar().estaSeleccionado(false)
+    	seleccionado = (((seleccionado - 1) % opciones.size()) + opciones.size()) % opciones.size()
+    	self.seleccionar().estaSeleccionado(true)
+    }
+
+    method abajo(){
+    	self.seleccionar().estaSeleccionado(false)
+    	seleccionado = (((seleccionado + 1) % opciones.size()) + opciones.size()) % opciones.size()
+    	self.seleccionar().estaSeleccionado(true)
+    }
+    method select(){
+        	self.seleccionar().iniciar()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

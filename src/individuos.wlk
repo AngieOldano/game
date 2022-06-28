@@ -1,8 +1,11 @@
 import wollok.game.*
-import nivel.*
-import bombas.*
+import juego.*
 import direcciones.*
+import musica.*
+import bombas.* 
 import elementos.*
+import nivel.*
+
 
 class Individuos{
 
@@ -34,8 +37,10 @@ object protagonista inherits Individuos{
 	
 	method tirarBomba(){
 		const bomba = new Bomba(position=self.position().clone(),image = 'bomba.png')
-		game.addVisual(bomba)
-		bomba.spawn()}
+		if(position!=game.at(1,1)){
+			game.addVisual(bomba)
+			bomba.spawn()}
+		}
 
 	method chocarConEnemigo(enemigo){
 		self.perderVida()		
@@ -64,7 +69,7 @@ object protagonista inherits Individuos{
 			corazones.cambiarACorazones1()
 		}
 		else{
-			self.morir()
+			game.clear()
 			musicaNivel.stop()
 			musicaPerder.play()
 			game.addVisualIn(pantallaDePerder,game.at(0,0))	}
@@ -86,7 +91,7 @@ object protagonista inherits Individuos{
 		else if(nivel==3){
 			musicaNivel.stop()
 			musicaFinal.play()
-			game.allVisuals().forEach{ visual => game.removeVisual(visual)}
+			game.clear()
 			game.addVisualIn(pantallaDeVictoria,game.at(0,0))
 			pantallaDeVictoria.iniciarAnimacion()
 		}
@@ -99,7 +104,7 @@ object protagonista inherits Individuos{
 
 class Enemigo inherits Individuos{
 	var property position = null
-	var property image='enem1.png'
+	var property image
 	var property direccion = izquierda
 	const sentidos = [ izquierda, derecha, arriba, abajo ]
 
